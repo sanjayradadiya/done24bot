@@ -2,10 +2,17 @@ const ig = {
 BASE_URL:'https://instagram.com?utm_source=pwa_homescreen',
 window:null,
 utils:null,
-bot:null,
+bot : null,
 parameters:null,
 
+init: async() => {
+	var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/instagram.js');
+        ig.bot = ig.utils.requireFromString(module);
+	ig.bot.utils = ig.utils;
+},
+
 process: async () => {
+
         let log = await ig.utils.log({"filename" : "index_ig_like", "function" : "process", "url" : ig.bot.page.url(), "instagram" : ig.bot.username });
 
 
