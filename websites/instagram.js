@@ -1,6 +1,6 @@
 const ig = {
 
-const elements = {
+elements : {
   wait: '//body[contains(@class,"wait-60-sec")]',
   error: '//body[contains(@class,"p-error")]',
   Instagram: '//img[@alt ="Instagram"]',
@@ -72,11 +72,10 @@ const elements = {
   notAvailableText: '//h2[contains(text(),"Sorry, this page isn\'t available.")]',
   videoControl: '//div[@aria-label="Control"]',
   viewerJSON :'//script[contains(text(),"window._sharedData = ")]/text()'
-};
+},
 
   utils : null,
   page: null,
-  elements: elements,
   username: null,
 
   open: async (username, password) => {
