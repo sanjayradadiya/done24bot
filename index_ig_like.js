@@ -6,13 +6,14 @@ bot : null,
 parameters:null,
 
 init: async() => {
+	console.log('init');
 	var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/instagram.js');
-        ig.bot = ig.utils.requireFromString(module);
+        ig.bot = await ig.utils.requireFromString(module);
 	ig.bot.utils = ig.utils;
 },
 
 process: async () => {
-
+	console.log('process');
         let log = await ig.utils.log({"filename" : "index_ig_like", "function" : "process", "url" : ig.bot.page.url(), "instagram" : ig.bot.username });
 
 
