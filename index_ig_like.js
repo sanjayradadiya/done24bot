@@ -37,8 +37,6 @@ process: async () => {
 	await ig.bot.openActivity();
 	await ig.utils.sleep(3000);
 
-        await ig.utils.updateJob('like', {"message" : "started liking" });
-
 	await ig.bot.openProfile();
 
 	for (var i = 1; i < 200; i++) { /// loop on my posts
