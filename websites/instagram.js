@@ -405,7 +405,7 @@ elements : {
 
           var elem = query.snapshotItem(i).href
           if (elem.indexOf('/following/') < 1 && elem.indexOf('/hashtag_following/') < 1) {
-            elem = elem.replace(/https:\/\/www.ig.com\//g, '')
+            elem = elem.replace(/https:\/\/www.instagram.com\//g, '')
             elem = elem.replace(/explore\/tags/g, '')
             elem = elem.replace(/\//g, '')
             elem !== 'accountsactivity' && elem !== '' && elem !== 'explore' && results.indexOf(elem) === -1 ? results.push(elem) : console.log("This item already exists");
