@@ -12,17 +12,23 @@ const az = {
 
 	init: async () => {
 
-        console.log('init...');
-        var module = await az.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/amazon.js') .catch(function(error) { console.log(error) });
-        az.bot = await az.utils.requireFromString(module) .catch(function(error) { console.log(error); });
+        console.log('index_az.js init...');
+        var module = await az.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/amazon.js') 
+		.catch(function(error) { console.log(error) });
+        az.bot = await az.utils.requireFromString(module) 
+		.catch(function(error) { console.log(error); });
         az.bot.utils = az.utils;
 
-	module = await az.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/google.js') .catch(function(error) { console.log(error) });
-        az.google = await az.utils.requireFromString(module) .catch(function(error) { console.log(error); });
+	module = await az.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/google.js') 
+		.catch(function(error) { console.log(error) });
+        az.google = await az.utils.requireFromString(module) 
+		.catch(function(error) { console.log(error); });
 	az.google.utils = az.utils;
 
-	module = await az.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/shopify.js') .catch(function(error) { console.log(error) });
-        az.shopify = await az.utils.requireFromString(module) .catch(function(error) { console.log(error); });
+	module = await az.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/shopify.js') 
+		.catch(function(error) { console.log(error) });
+        az.shopify = await az.utils.requireFromString(module) 
+		.catch(function(error) { console.log(error); });
 	az.shopify.utils = az.utils;
 
 	},
