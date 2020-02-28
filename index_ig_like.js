@@ -6,9 +6,15 @@ bot : null,
 parameters:null,
 
 init: async() => {
-	console.log('init');
-	var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/instagram.js');
-        ig.bot = await ig.utils.requireFromString(module);
+	console.log('init...');
+	var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/instagram.js')
+		.catch(function(error) {
+			console.log(error)
+		});
+        ig.bot = await ig.utils.requireFromString(module)
+		.catch(function(error) {
+			console.log(error);
+		});
 	ig.bot.utils = ig.utils;
 },
 
