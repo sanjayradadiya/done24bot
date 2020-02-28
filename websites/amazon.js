@@ -1,4 +1,3 @@
-var utils = require('../common/utils');
 const BASE_URL = 'https://www.amazon.com.au';
 
 const element = {
@@ -62,6 +61,7 @@ const element = {
 const amazon = {
     page: null,
     parameters : null,
+    utils:null,
     element,
 
     checkLogin: async (in_timeout, bot) => {

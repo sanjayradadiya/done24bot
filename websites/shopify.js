@@ -1,6 +1,5 @@
-var utils = require('../common/utils');
-
 const shopify = {
+utils: null,
 url : null,
 
 initialise : async (parameters) => {
