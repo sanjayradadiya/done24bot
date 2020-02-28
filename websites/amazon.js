@@ -123,7 +123,7 @@ const amazon = {
     searchProducts: async () => {
 
 	await amazon.page.waitFor(1000);
-        await utils.click(amazon, amazon.element.cart, 1000)
+        await amazon.utils.click(amazon, amazon.element.cart, 1000)
 	await amazon.page.waitFor(1000);
 
 	var empty = false;
@@ -134,7 +134,7 @@ const amazon = {
 			empty = true
 		} catch (e) {
 			empty = false
-        		await utils.click(amazon, amazon.element.deleteCart, 1000)
+        		await amazon.utils.click(amazon, amazon.element.deleteCart, 1000)
 			await amazon.page.waitFor(3000);
 		}
 	}
@@ -144,21 +144,21 @@ const amazon = {
 
 
 	for(var i=0;i<amazon.parameters.products.length;i++) {
-		await utils.clearInput(amazon, amazon.element.productSearch);
+		await amazon.utils.clearInput(amazon, amazon.element.productSearch);
        		await amazon.page.waitFor(amazon.element.productSearch);
 		console.log("search:" , amazon.parameters.products[i].amazon);
        		await amazon.page.type(amazon.element.productSearch, amazon.parameters.products[i].amazon, { delay: 50 });
        		await amazon.page.keyboard.press('Enter');
        		await amazon.page.waitFor(3000);
-		await utils.click(amazon, amazon.element.searchProductNode, 10000)
+		await amazon.utils.click(amazon, amazon.element.searchProductNode, 10000)
 		await amazon.page.waitFor(5000);
-		await utils.click(amazon, amazon.element.quantity, 1000)
+		await amazon.utils.click(amazon, amazon.element.quantity, 1000)
 		await amazon.page.waitFor(5000);
-		await utils.click(amazon, '//*[contains(@data-value, \'"stringVal":"'+amazon.parameters.products[i].qty+'"\')]', 3000)
-		await utils.wait(3000, amazon);
-		await utils.click(amazon, amazon.element.addCartBtn, 10000)
+		await amazon.utils.click(amazon, '//*[contains(@data-value, \'"stringVal":"'+amazon.parameters.products[i].qty+'"\')]', 3000)
+		await amazon.utils.wait(3000, amazon);
+		await amazon.utils.click(amazon, amazon.element.addCartBtn, 10000)
        		await amazon.page.waitFor(5000);
-		await utils.click(amazon, amazon.element.checkGift, 10000)
+		await amazon.utils.click(amazon, amazon.element.checkGift, 10000)
         	await amazon.page.waitFor(1000);
 	}
 
@@ -191,9 +191,9 @@ const amazon = {
         }
 */
 
-	await utils.wait(2000, amazon);
-	await utils.click(amazon , amazon.element.addNewAddress, 10000);
-        await utils.wait(2000, amazon);
+	await amazon.utils.wait(2000, amazon);
+	await amazon.utils.click(amazon , amazon.element.addNewAddress, 10000);
+        await amazon.utils.wait(2000, amazon);
 
 	await amazon.page.waitFor(1000);
 
@@ -223,9 +223,9 @@ const amazon = {
 	try {
 		await amazon.page.waitFor(2000);
 		await amazon.page.waitFor(amazon.element.citySuburbTown);
-                await utils.click(amazon, '//*[@id="enterAddressCitySelectContainer"]//*[@role="button"]' , 1000);
+                await amazon.utils.click(amazon, '//*[@id="enterAddressCitySelectContainer"]//*[@role="button"]' , 1000);
                 await amazon.page.waitFor(3000);
-		await utils.click(amazon, '//a[@data-value=\'{"stringVal":"'+amazon.parameters.customer.city+'"}\']', 3000)
+		await amazon.utils.click(amazon, '//a[@data-value=\'{"stringVal":"'+amazon.parameters.customer.city+'"}\']', 3000)
 		await amazon.page.waitFor(3000);
 	} catch(e) {
 		console.log('only one city');
@@ -251,12 +251,12 @@ const amazon = {
         let body = amazon.parameters.giftcard;
 	let from = amazon.parameters.giftfrom;
 
-	await utils.wait(3000, amazon);
+	await amazon.utils.wait(3000, amazon);
 
 	for(var i=0;i<20;i++) {
                 try { 
 			await uamazon.page.click('//i[contains(@class,"a-icon-section-expand")]/..', { timeout :100})
-			await utils.wait(1000, amazon);
+			await amazon.utils.wait(1000, amazon);
 		} catch(e) {
 			break; 
 		}
@@ -266,17 +266,17 @@ const amazon = {
 		try {
 			await amazon.page.waitFor('//*[@id="message-area-'+j+'"]', { timeout : 100} )
 			console.log('gifTextareaEle', j);
-		        await utils.wait(1000, amazon);
+		        await amazon.utils.wait(1000, amazon);
 
         		await amazon.page.evaluate((element, value) => {
 		            	console.log(value, document.querySelector(element));
         	    		document.querySelector(element).value = value;
         		}, '#message-area-'+j , body);
 
-			await utils.clearInput(amazon, '#gift-message-sender-input-' + j , 1000)
-			await utils.wait(500, amazon);
+			await amazon.utils.clearInput(amazon, '#gift-message-sender-input-' + j , 1000)
+			await amazon.utils.wait(500, amazon);
 		        await amazon.page.type('#gift-message-sender-input-' + j, from, { delay: 50 });
-			await utils.wait(500, amazon);
+			await amazon.utils.wait(500, amazon);
 
 
 		} catch (e) { 
@@ -284,27 +284,27 @@ const amazon = {
 			break; }
 	}
 
-	await utils.click(amazon,amazon.element.saveGiftOption,1000);
-	await utils.wait(4000, amazon);
-	await utils.click(amazon,amazon.element.Continue,1000);
-	await utils.wait(2000, amazon);
-//	await utils.click(amazon,amazon.element.continueDelivery,1000);
-//	await utils.click(amazon,amazon.element.continueDeliveryNew,1000);
+	await amazon.utils.click(amazon,amazon.element.saveGiftOption,1000);
+	await amazon.utils.wait(4000, amazon);
+	await amazon.utils.click(amazon,amazon.element.Continue,1000);
+	await amazon.utils.wait(2000, amazon);
+//	await amazon.utils.click(amazon,amazon.element.continueDelivery,1000);
+//	await amazon.utils.click(amazon,amazon.element.continueDeliveryNew,1000);
 
-        await utils.wait(4000, amazon);
-	await utils.click(amazon, amazon.element.addNewPaymentMethod, 1000);
-        await utils.wait(4000, amazon);
-	await utils.click(amazon, amazon.element.addCreditCard, 1000);
-	await utils.wait(4000, amazon);
+        await amazon.utils.wait(4000, amazon);
+	await amazon.utils.click(amazon, amazon.element.addNewPaymentMethod, 1000);
+        await amazon.utils.wait(4000, amazon);
+	await amazon.utils.click(amazon, amazon.element.addCreditCard, 1000);
+	await amazon.utils.wait(4000, amazon);
 	await amazon.setCreditCard();
-	await utils.click(amazon, amazon.element.paymentContinue,1000);
-        await utils.wait(4000, amazon);
-	await utils.click(amazon, amazon.element.placeYourOrder, 1000);
-	await utils.wait(4000, amazon);
-	await utils.click(amazon, amazon.element.reviewOrder, 1000);
-	await utils.wait(4000, amazon);
-	await utils.click(amazon, amazon.element.trackShipment, 1000);
-        await utils.wait(4000, amazon);
+	await amazon.utils.click(amazon, amazon.element.paymentContinue,1000);
+        await amazon.utils.wait(4000, amazon);
+	await amazon.utils.click(amazon, amazon.element.placeYourOrder, 1000);
+	await amazon.utils.wait(4000, amazon);
+	await amazon.utils.click(amazon, amazon.element.reviewOrder, 1000);
+	await amazon.utils.wait(4000, amazon);
+	await amazon.utils.click(amazon, amazon.element.trackShipment, 1000);
+        await amazon.utils.wait(4000, amazon);
 	return amazon.page.url()
     },
 
@@ -318,13 +318,13 @@ const amazon = {
 	expMonth.select(amazon.parameters.buyer.expireMonth);
 	var expYear = await amazon.page.waitFor(amazon.element.selectExpYear);
         expYear.select(amazon.parameters.buyer.expireYear)
-	await utils.click(amazon, amazon.element.addYourCard, 1000)
-        await utils.wait(3000, amazon);
+	await amazon.utils.click(amazon, amazon.element.addYourCard, 1000)
+        await amazon.utils.wait(3000, amazon);
     },
 
     closeTryAppModal: async () => {
 	console.log('closeTryAppModal')
-	await utils.click(amazon, amazon.element.closeAppModal, 1000)
+	await amazon.utils.click(amazon, amazon.element.closeAppModal, 1000)
     },
 
     home: async () => {
