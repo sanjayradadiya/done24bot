@@ -17,6 +17,10 @@ const ig = {
 	let log = await ig.utils.log({"filename" : "index_telegram", "function" : "process", "url" : ig.bot.page.url() });
         const loginData = await ig.bot.login();
 
+	await ig.utils.saveCookies(ig.bot).catch(function(error) {
+                console.log(error);
+        });	
+
 
   }
 }
