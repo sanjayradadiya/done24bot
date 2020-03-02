@@ -1,5 +1,5 @@
 const ig = {
-  BASE_URL:'https://web.telegram.com',
+  BASE_URL:'https://web.telegram.org/#/im?p=@done24bot',
   window:null,
   utils:null,
   bot : null,
