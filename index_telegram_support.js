@@ -19,5 +19,5 @@ const ig = {
 
 
   }
-
+}
 module.exports = ig;
