@@ -197,7 +197,7 @@ elements : {
     } catch (e) { }
 
     try {
-      await ig.page.waitFor(ig.elements.actionBlocked, { timeout: 1000 });
+      await ig.page.waitFor(ig.elements.actionBlocked, { timeout: 2000 });
       console.log("Action Blocked")
       await ig.page.screenshot({path: 'action-blocked.png'});
       await ig.utils.log({"message" : "Action Blocked"} )
@@ -205,21 +205,21 @@ elements : {
     } catch (e) { }
 
     try {
-      await ig.page.waitFor(ig.elements.wait, { timeout: 1000 });
+      await ig.page.waitFor(ig.elements.wait, { timeout: 2000 });
       console.log("wait")
       await ig.utils.log({"message" : "wait"} )
       return "wait"
     } catch (e) { }
 
     try {
-      await ig.page.waitFor(ig.elements.error, { timeout: 1000 });
+      await ig.page.waitFor(ig.elements.error, { timeout: 2000 });
       console.log("wait")
       await ig.utils.log({"message" : "error"} )
       return "error"
     } catch (e) { }
 
     try {
-      await ig.page.waitFor(ig.elements.temporaryBlocked, { timeout: 1000 });
+      await ig.page.waitFor(ig.elements.temporaryBlocked, { timeout: 2000 });
       console.log("Teamporary Blocked")
       const notNowButton = await ig.page.$x(ig.elements.reportProblem);
       await notNowButton[0].click();
