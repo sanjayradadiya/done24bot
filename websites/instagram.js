@@ -162,6 +162,7 @@ elements : {
       await ig.page.waitFor(ig.elements.getApp, { timeout: 1000 });
       const notNowLink = await ig.page.$x(ig.elements.notNowLink);
       await notNowLink[0].click();
+      await ig.utils.log({"message" : "Now Now", "instagram" : ig.username} )
       console.log("Not Now");
     } catch (e) { }
 
@@ -169,7 +170,7 @@ elements : {
       await ig.page.waitFor(ig.elements.addInstagramToHome, { timeout: 1000 });
       const cancelButton = await ig.page.$x(ig.elements.cancelButton);
       await cancelButton[0].click();
-      await ig.utils.log({"message" : "Add Instagram to your Home screen?"} )
+      await ig.utils.log({"message" : "Add Instagram to your Home screen?", "instagram" : ig.username} )
       console.log("Add Instagram to your Home screen?")
       ig.utils.saveCookies(instagram)
 
@@ -200,21 +201,21 @@ elements : {
       await ig.page.waitFor(ig.elements.actionBlocked, { timeout: 2000 });
       console.log("Action Blocked")
       await ig.page.screenshot({path: 'action-blocked.png'});
-      await ig.utils.log({"message" : "Action Blocked"} )
+      await ig.utils.log({"message" : "Action Blocked", "instagram" : ig.username} )
       return "Action Blocked"
     } catch (e) { }
 
     try {
       await ig.page.waitFor(ig.elements.wait, { timeout: 2000 });
       console.log("wait")
-      await ig.utils.log({"message" : "wait"} )
+      await ig.utils.log({"message" : "wait", "instagram" : ig.username} )
       return "wait"
     } catch (e) { }
 
     try {
       await ig.page.waitFor(ig.elements.error, { timeout: 2000 });
       console.log("wait")
-      await ig.utils.log({"message" : "error"} )
+      await ig.utils.log({"message" : "error", "instagram" : ig.username} )
       return "error"
     } catch (e) { }
 
@@ -223,7 +224,7 @@ elements : {
       console.log("Teamporary Blocked")
       const notNowButton = await ig.page.$x(ig.elements.reportProblem);
       await notNowButton[0].click();
-      await ig.utils.log({"message" : "Temporary Blocked"} )
+      await ig.utils.log({"message" : "Temporary Blocked", "instagram" : ig.username} )
       return "Temporary Blocked"
     } catch (e) { }
 
