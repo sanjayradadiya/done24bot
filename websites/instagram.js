@@ -517,6 +517,7 @@ elements : {
       try {
         const likeButton = await ig.page.waitFor(ig.elements.postUnfilledHeart, { timeout: 3000 });
         await likeButton.click();
+	ig.cancelMessage();
         await ig.utils.sleep(500);
         await ig.page.waitFor(ig.elements.postFilledHeart, { timeout: 3000 });
         await ig.utils.saveCookies(instagram)
