@@ -1,7 +1,7 @@
 const ig = {
 BASE_URL:'https://instagram.com?utm_source=pwa_homescreen',
 name: 'instagram hashtag liker',
-description: '1) open instagram 2) open your last opst 3) get the hashtags 4) open the recent hashtag list 5) start like the posts and post comments',
+description: '1) open instagram 2) open your last post 3) get all hashtags 4) open the recent hashtag list 5) start like the posts and comments for the post',
 window:null,
 utils:null,
 bot : null,
