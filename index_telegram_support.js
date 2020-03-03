@@ -1,5 +1,7 @@
 const ig = {
   BASE_URL:'https://web.telegram.org/#/im?p=@done24bot',
+  name:'telegram support',
+  description: "open telegram and the done24bot",
   window:null,
   utils:null,
   bot : null,
