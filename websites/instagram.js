@@ -691,7 +691,58 @@ elements : {
       console.log("can't send message");
       return { "status": "Can't send message. You might be blocked." }
     }
-  }
+  },
+
+  turnOffNotification: async () => {
+    try {
+      await ig.page.waitFor(ig.elements.turnOnNotifications, { timeout: 100 });
+      const notNowButton = await ig.page.$x(ig.elements.notNowButton);
+      await notNowButton[0].click();
+      console.log("Turn on Notifications");
+    } catch (e) {
+    }
+  },
+
+  viewStories: async (viewStoriesCount) => {
+    await ig.page.waitFor(2000);
+    await ig.cancelMessage();
+    try {
+
+      let article = await ig.page.$('article');
+
+      await ig.page.evaluate((ele) => {
+        ele.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        });
+      }, article);
+
+      let count = 0;
+      while (viewStoriesCount > count) {
+        console.log(count + 1);
+
+        article = await ig.page.evaluateHandle(el => el.nextElementSibling, article);
+
+        const type = await article.evaluate(node => node.tagName);
+
+        if (type === 'ARTICLE') {
+          await ig.turnOffNotification();
+          await ig.page.evaluate((ele) => {
+            ele.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest'
+            });
+          }, article);
+          count++;
+        } else {
+          console.log('skip node other then article');
+        }
+        await ig.utils.sleep(1000);
+      }
+
+    } catch (e) { console.log(e); }
+    await ig.utils.sleep(2000);
+  },
 
 };
 
