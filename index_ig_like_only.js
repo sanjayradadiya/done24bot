@@ -1,10 +1,11 @@
 const ig = {
     BASE_URL: 'https://instagram.com?utm_source=pwa_homescreen',
-    name: 'instagram hashtag liker',
-    description: '1) open instagram 2) open your last opst 3) get the hashtags 4) open the recent hashtag list 5) start like the posts and post comments',
+    description: 'Like the main feed on instagram',
     window: null,
     utils: null,
     bot: null,
+    form: [{ "id": "nr_of_likes", "type" : "input", "placeholder" : "nr of likes"}],
+
     parameters: null,
 
     init: async () => {
@@ -36,7 +37,7 @@ const ig = {
         await ig.utils.sleep(1000);
 
         try {
-            await ig.bot.viewStories(10);
+            await ig.bot.mainFeed(ig.parameters.nr_of_likes);
         } catch (e) {
             console.log(e);
         }

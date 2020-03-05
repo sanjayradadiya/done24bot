@@ -703,7 +703,7 @@ const ig = {
     }
   },
 
-  viewStories: async (viewStoriesCount) => {
+  mainFeedLike: async (viewStoriesCount) => {
     await ig.page.waitFor(2000);
     await ig.cancelMessage();
     try {
