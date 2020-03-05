@@ -158,12 +158,12 @@ const ig = {
   },
   cancelMessage: async () => {
 
-    // try {
-    //   await ig.page.waitFor(ig.elements.getApp, { timeout: 1000 });
-    //   const notNowLink = await ig.page.$x(ig.elements.notNowLink);
-    //   await notNowLink[0].click();
-    //   console.log("Not Now");
-    // } catch (e) { }
+    try {
+      await ig.page.waitFor(ig.elements.getApp, { timeout: 1000 });
+      const notNowLink = await ig.page.$x(ig.elements.notNowLink);
+      await notNowLink[0].click();
+      console.log("Not Now");
+    } catch (e) { }
 
     try {
       await ig.page.waitFor(ig.elements.addInstagramToHome, { timeout: 1000 });
@@ -175,57 +175,57 @@ const ig = {
 
     } catch (e) { }
 
-    // try {
-    //   await ig.page.waitFor(ig.elements.turnOnNotifications, { timeout: 1000 });
-    //   const notNowButton = await ig.page.$x(ig.elements.notNowButton);
-    //   await notNowButton[0].click();
-    //   console.log("Turn on Notifications");
-    // } catch (e) { }
+    try {
+      await ig.page.waitFor(ig.elements.turnOnNotifications, { timeout: 1000 });
+      const notNowButton = await ig.page.$x(ig.elements.notNowButton);
+      await notNowButton[0].click();
+      console.log("Turn on Notifications");
+    } catch (e) { }
 
-    // try {
-    //   await ig.page.waitFor(ig.elements.xButtonFindMore, { timeout: 1000 });
-    //   const notNowButton = await ig.page.$x(ig.elements.xButtonFindMore);
-    //   await notNowButton[0].click();
-    //   console.log("Close Find More");
-    // } catch (e) { }
+    try {
+      await ig.page.waitFor(ig.elements.xButtonFindMore, { timeout: 1000 });
+      const notNowButton = await ig.page.$x(ig.elements.xButtonFindMore);
+      await notNowButton[0].click();
+      console.log("Close Find More");
+    } catch (e) { }
 
-    // try {
-    //   await ig.page.waitFor(ig.elements.saveLoginInfo, { timeout: 30000 });
-    //   const saveLoginInfo = await ig.page.$x(ig.elements.saveLoginInfo);
-    //   await saveLoginInfo[0].click();
-    //   console.log("Save Login Info")
-    // } catch (e) { }
+    try {
+      await ig.page.waitFor(ig.elements.saveLoginInfo, { timeout: 30000 });
+      const saveLoginInfo = await ig.page.$x(ig.elements.saveLoginInfo);
+      await saveLoginInfo[0].click();
+      console.log("Save Login Info")
+    } catch (e) { }
 
-    // try {
-    //   await ig.page.waitFor(ig.elements.actionBlocked, { timeout: 1000 });
-    //   console.log("Action Blocked")
-    //   await ig.page.screenshot({ path: 'action-blocked.png' });
-    //   await ig.utils.log({ "message": "Action Blocked" })
-    //   return "Action Blocked"
-    // } catch (e) { }
+    try {
+      await ig.page.waitFor(ig.elements.actionBlocked, { timeout: 1000 });
+      console.log("Action Blocked")
+      await ig.page.screenshot({ path: 'action-blocked.png' });
+      await ig.utils.log({ "message": "Action Blocked" })
+      return "Action Blocked"
+    } catch (e) { }
 
-    // try {
-    //   await ig.page.waitFor(ig.elements.wait, { timeout: 1000 });
-    //   console.log("wait")
-    //   await ig.utils.log({ "message": "wait" })
-    //   return "wait"
-    // } catch (e) { }
+    try {
+      await ig.page.waitFor(ig.elements.wait, { timeout: 1000 });
+      console.log("wait")
+      await ig.utils.log({ "message": "wait" })
+      return "wait"
+    } catch (e) { }
 
-    // try {
-    //   await ig.page.waitFor(ig.elements.error, { timeout: 1000 });
-    //   console.log("wait")
-    //   await ig.utils.log({ "message": "error" })
-    //   return "error"
-    // } catch (e) { }
+    try {
+      await ig.page.waitFor(ig.elements.error, { timeout: 1000 });
+      console.log("wait")
+      await ig.utils.log({ "message": "error" })
+      return "error"
+    } catch (e) { }
 
-    // try {
-    //   await ig.page.waitFor(ig.elements.temporaryBlocked, { timeout: 1000 });
-    //   console.log("Teamporary Blocked")
-    //   const notNowButton = await ig.page.$x(ig.elements.reportProblem);
-    //   await notNowButton[0].click();
-    //   await ig.utils.log({ "message": "Temporary Blocked" })
-    //   return "Temporary Blocked"
-    // } catch (e) { }
+    try {
+      await ig.page.waitFor(ig.elements.temporaryBlocked, { timeout: 1000 });
+      console.log("Teamporary Blocked")
+      const notNowButton = await ig.page.$x(ig.elements.reportProblem);
+      await notNowButton[0].click();
+      await ig.utils.log({ "message": "Temporary Blocked" })
+      return "Temporary Blocked"
+    } catch (e) { }
 
   },
   goBack: async () => {
