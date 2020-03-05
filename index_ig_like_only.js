@@ -10,7 +10,8 @@ const ig = {
     init: async () => {
         console.log('init...');
         var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/instagram.js');
-        ig.bot = await ig.utils.requireFromString(module)
+        // ig.bot = await ig.utils.requireFromString(module)
+        ig.bot = require('./websites/instagram');
         ig.bot.utils = ig.utils;
     },
 
@@ -36,7 +37,7 @@ const ig = {
         await ig.utils.sleep(1000);
 
         try {
-            await ig.bot.viewStories(20);
+            await ig.bot.viewStories(10);
         } catch (e) {
             console.log(e);
         }

@@ -1,80 +1,80 @@
 const ig = {
 
-elements : {
-  wait: '//body[contains(@class,"wait-60-sec")]',
-  error: '//body[contains(@class,"p-error")]',
-  Instagram: '//img[@alt ="Instagram"]',
-  loginButton1: '//*[contains(text(), "Log In")]',
-  username: 'input[name="username"]',
-  password: 'input[name="password"]',
-  loginButton2: '//button/div[contains(text(), "Log In")]',
-  searchButton: '//*[@aria-label="Search & Explore"]',
-  activityButton: '//*[@aria-label="Activity"]/..',
-  activityText: '//h1[contains(text(),"Activity")]/..',
-  profileButton: '//*[@aria-label="Profile"]',
-  profileText: '//h1[contains(text(),"Profile")]',
-  followingText: '//main//div[contains(text(),"Following")]',
-  hashtagsText: '//main//span[contains(text(),"Hashtags")]',
-  searchBar: 'input[placeholder="Search"]',
-  newPostButton: '//*[contains(@aria-label,"New Post")]',
-  saveLoginInfo: '//*[contains(text(),"Save Info")]',
-  //firstSearchResult: 'ul > li:first-child > a',
-  correctSearchResult: '//a//div',
-  messagegButton: '//div/button[contains(text(), "Message")]',
-  textArea: 'textArea',
-  sendMessage: '//div/button[contains(text(), "Send")]',
-  followButton: '//button[text() = "Follow"]',
-  followBackButton: '//button[text() = "Follow Back"]',
-  followingButton: '//*[text() = "Following" or @aria-label="Following"]',
-  unfollowButton: '//button[text() = "Unfollow"]',
-  profile: '//*[contains(@aria-label,"Profile")]',
-  cancelButton: '//button[contains(text(),"Cancel")]',
-  xButtonFindMore: '//*[contains(@class,"glyphsSpriteGrey_Close")]',
-  addPhoneNumber: '//h2[contains(text(),"Add Your Phone Number")]',
-  getApp: '//h1[contains(text(),"Get the Instagram App")]',
-  notNowLink: '//a[contains(text(),"Not Now")]',
-  addInstagramToHome: '//*[contains(text(),"Add Instagram to your Home screen?")]',
-  turnOnNotifications: '//*[contains(text(),"Turn on Notifications")]',
-  notNowButton: '//button[contains(text(),"Not Now")]',
-  homeButton: '//a//span[@aria-label="Home"]',
-  directMsgButton: '//a//span[@aria-label="Direct"]',
-  directMsgReqButton: '//*[@id="react-root"]/section/div[2]/div/div/div[2]/div/div[1]/button',
-  messageRequests: '//h1[contains(text(),"Message Requests")]',
-  directMsgReqLists: '//*[@id="react-root"]/section/div[2]/div/div[2]/a',
-  allow: '//div[contains(text(),"Allow")]',
-  backLink: '//*[@aria-label="Back"]',
-  disabledAccount: '//p[contains(text(),"Your account has been disabled for violating our terms")]',
-  suspiciousLoginAttempt: '//*[contains(text(), "Suspicious Login Attempt")]',
-  actionBlocked: '//*[contains(text(), "Action Blocked")]',
-  temporaryBlocked: '//*[contains(text(), "Temporarily Blocked")]',
-  reportProblem: '//*[contains(text(), "Report a Problem")]',
-  following: '//*[contains(@href, "following")]',
-  followers: '//*[contains(@href, "followers")]',
-  see_all_followers: '//*[contains(text(), "See All Followers")]',
-  followingItem: '//a[contains(@href,"/")]',
-  hashtagItem: '//a[contains(@href,"explore") and contains(@href,"tags")]',
-  profileMedia: '//a[contains(@href,"/p/")]',
-  postUnfilledHeart: '//*[@aria-label="Like" and contains(@height,"24")]/..',
-  postFilledHeart: '//*[@aria-label="Unlike" and contains(@height,"24")]/..',
-  postComment: '//*[@aria-label="Comment"]/..',
-  postUser: '//article//header//a',
-  textPhoto: '//h1[text()="Photo" or text()="Post" or text()="Video"]',
-  textComments: '//h1[text()="Comments"]',
-  commentLike: '//*[@aria-label="Like" and contains(@height,"12")]/..',
-  commentViewReplies: '//*[contains(text(),"View replies")]/..',
-  profileFollowUnfollowtext: '//button[contains(text(),"Follow") or contains(text(),"Following") or contains(text(),"Message") or contains(text(),"Edit Profile")]',
-  profilePostsNr: '//span//span[contains(.,"posts")]/span',
-  profileFollowersNr: '//span/following-sibling::text()[contains(.,"followers")]/../span',
-  profileFollowingNr: '//span/following-sibling::text()[contains(.,"following")]/../span',
-  profileUsername: '//nav//header//h1',
-  usernameFromPost: '//*[@id="react-root"]/section/main/div/div/article/header/div[2]/div[1]/div[1]/h2/a',
-  isPrivate: '//*[contains(text(),"This Account is Private")]',
-  notAvailableText: '//h2[contains(text(),"Sorry, this page isn\'t available.")]',
-  videoControl: '//div[@aria-label="Control"]',
-  viewerJSON :'//script[contains(text(),"window._sharedData = ")]/text()'
-},
+  elements: {
+    wait: '//body[contains(@class,"wait-60-sec")]',
+    error: '//body[contains(@class,"p-error")]',
+    Instagram: '//img[@alt ="Instagram"]',
+    loginButton1: '//*[contains(text(), "Log In")]',
+    username: 'input[name="username"]',
+    password: 'input[name="password"]',
+    loginButton2: '//button/div[contains(text(), "Log In")]',
+    searchButton: '//*[@aria-label="Search & Explore"]',
+    activityButton: '//*[@aria-label="Activity"]/..',
+    activityText: '//h1[contains(text(),"Activity")]/..',
+    profileButton: '//*[@aria-label="Profile"]',
+    profileText: '//h1[contains(text(),"Profile")]',
+    followingText: '//main//div[contains(text(),"Following")]',
+    hashtagsText: '//main//span[contains(text(),"Hashtags")]',
+    searchBar: 'input[placeholder="Search"]',
+    newPostButton: '//*[contains(@aria-label,"New Post")]',
+    saveLoginInfo: '//*[contains(text(),"Save Info")]',
+    //firstSearchResult: 'ul > li:first-child > a',
+    correctSearchResult: '//a//div',
+    messagegButton: '//div/button[contains(text(), "Message")]',
+    textArea: 'textArea',
+    sendMessage: '//div/button[contains(text(), "Send")]',
+    followButton: '//button[text() = "Follow"]',
+    followBackButton: '//button[text() = "Follow Back"]',
+    followingButton: '//*[text() = "Following" or @aria-label="Following"]',
+    unfollowButton: '//button[text() = "Unfollow"]',
+    profile: '//*[contains(@aria-label,"Profile")]',
+    cancelButton: '//button[contains(text(),"Cancel")]',
+    xButtonFindMore: '//*[contains(@class,"glyphsSpriteGrey_Close")]',
+    addPhoneNumber: '//h2[contains(text(),"Add Your Phone Number")]',
+    getApp: '//h1[contains(text(),"Get the Instagram App")]',
+    notNowLink: '//a[contains(text(),"Not Now")]',
+    addInstagramToHome: '//*[contains(text(),"Add Instagram to your Home screen?")]',
+    turnOnNotifications: '//*[contains(text(),"Turn on Notifications")]',
+    notNowButton: '//button[contains(text(),"Not Now")]',
+    homeButton: '//a//span[@aria-label="Home"]',
+    directMsgButton: '//a//span[@aria-label="Direct"]',
+    directMsgReqButton: '//*[@id="react-root"]/section/div[2]/div/div/div[2]/div/div[1]/button',
+    messageRequests: '//h1[contains(text(),"Message Requests")]',
+    directMsgReqLists: '//*[@id="react-root"]/section/div[2]/div/div[2]/a',
+    allow: '//div[contains(text(),"Allow")]',
+    backLink: '//*[@aria-label="Back"]',
+    disabledAccount: '//p[contains(text(),"Your account has been disabled for violating our terms")]',
+    suspiciousLoginAttempt: '//*[contains(text(), "Suspicious Login Attempt")]',
+    actionBlocked: '//*[contains(text(), "Action Blocked")]',
+    temporaryBlocked: '//*[contains(text(), "Temporarily Blocked")]',
+    reportProblem: '//*[contains(text(), "Report a Problem")]',
+    following: '//*[contains(@href, "following")]',
+    followers: '//*[contains(@href, "followers")]',
+    see_all_followers: '//*[contains(text(), "See All Followers")]',
+    followingItem: '//a[contains(@href,"/")]',
+    hashtagItem: '//a[contains(@href,"explore") and contains(@href,"tags")]',
+    profileMedia: '//a[contains(@href,"/p/")]',
+    postUnfilledHeart: '//*[@aria-label="Like" and contains(@height,"24")]/..',
+    postFilledHeart: '//*[@aria-label="Unlike" and contains(@height,"24")]/..',
+    postComment: '//*[@aria-label="Comment"]/..',
+    postUser: '//article//header//a',
+    textPhoto: '//h1[text()="Photo" or text()="Post" or text()="Video"]',
+    textComments: '//h1[text()="Comments"]',
+    commentLike: '//*[@aria-label="Like" and contains(@height,"12")]/..',
+    commentViewReplies: '//*[contains(text(),"View replies")]/..',
+    profileFollowUnfollowtext: '//button[contains(text(),"Follow") or contains(text(),"Following") or contains(text(),"Message") or contains(text(),"Edit Profile")]',
+    profilePostsNr: '//span//span[contains(.,"posts")]/span',
+    profileFollowersNr: '//span/following-sibling::text()[contains(.,"followers")]/../span',
+    profileFollowingNr: '//span/following-sibling::text()[contains(.,"following")]/../span',
+    profileUsername: '//nav//header//h1',
+    usernameFromPost: '//*[@id="react-root"]/section/main/div/div/article/header/div[2]/div[1]/div[1]/h2/a',
+    isPrivate: '//*[contains(text(),"This Account is Private")]',
+    notAvailableText: '//h2[contains(text(),"Sorry, this page isn\'t available.")]',
+    videoControl: '//div[@aria-label="Control"]',
+    viewerJSON: '//script[contains(text(),"window._sharedData = ")]/text()'
+  },
 
-  utils : null,
+  utils: null,
   page: null,
   username: null,
 
@@ -82,14 +82,14 @@ elements : {
     await ig.page.goto(BASE_URL, { waitUntil: 'networkidle0' });
   },
 
-  checkLogin: async() => {
+  checkLogin: async () => {
 
-   try {
+    try {
       const profile = await ig.page.waitFor(ig.elements.profile, { timeout: 10000 });
       return true
-   } catch (e) {
+    } catch (e) {
       return false
-   }	
+    }
 
   },
 
@@ -121,111 +121,111 @@ elements : {
   },
 
   getViewer: async () => {
-	var innerHTML = await ig.page.evaluate((selector) => {
-      		let query = document.evaluate(selector, document, null, XPathResult.ANY_TYPE, null);
-		var data = query.iterateNext();
-		return data.textContent
-    	}, ig.elements.viewerJSON);
+    var innerHTML = await ig.page.evaluate((selector) => {
+      let query = document.evaluate(selector, document, null, XPathResult.ANY_TYPE, null);
+      var data = query.iterateNext();
+      return data.textContent
+    }, ig.elements.viewerJSON);
 
-	innerHTML = innerHTML.replace('window._sharedData = ','');
-	innerHTML = innerHTML.substr(0,innerHTML.length-1)	;
-	ig.username = JSON.parse(innerHTML).config.viewer.username;
-	ig.elements.profileButton = '//a[@href="/'+ig.username+'/"]'
+    innerHTML = innerHTML.replace('window._sharedData = ', '');
+    innerHTML = innerHTML.substr(0, innerHTML.length - 1);
+    ig.username = JSON.parse(innerHTML).config.viewer.username;
+    ig.elements.profileButton = '//a[@href="/' + ig.username + '/"]'
   },
 
   catchError: async () => {
     try {
       await ig.page.waitFor(ig.elements.addPhoneNumber, { timeout: 200 });
-      await ig.utils.log({"message" : "Add Phone Number"});
+      await ig.utils.log({ "message": "Add Phone Number" });
       return { "status": "Add Phone Number" }
     } catch (e) { }
 
     try {
       await ig.page.waitFor(ig.elements.disabledAccount, { timeout: 200 });
-      await ig.utils.log({"message" : "Disabled Account"});
+      await ig.utils.log({ "message": "Disabled Account" });
       return { "status": "Disabled Account" }
     } catch (e) { }
     try {
       await ig.page.waitFor(ig.elements.suspiciousLoginAttempt, { timeout: 200 });
-      await ig.utils.log({"message" : "Suspicious Login Attempt"});
+      await ig.utils.log({ "message": "Suspicious Login Attempt" });
       return { "status": "Suspicious Login Attempt" }
     } catch (e) {
     }
 
     ig.cancelMessage();
-    await ig.utils.log({"message" : "Login Error"});
+    await ig.utils.log({ "message": "Login Error" });
     return { "status": "Login Error" }
   },
   cancelMessage: async () => {
 
-    try {
-      await ig.page.waitFor(ig.elements.getApp, { timeout: 1000 });
-      const notNowLink = await ig.page.$x(ig.elements.notNowLink);
-      await notNowLink[0].click();
-      console.log("Not Now");
-    } catch (e) { }
+    // try {
+    //   await ig.page.waitFor(ig.elements.getApp, { timeout: 1000 });
+    //   const notNowLink = await ig.page.$x(ig.elements.notNowLink);
+    //   await notNowLink[0].click();
+    //   console.log("Not Now");
+    // } catch (e) { }
 
     try {
       await ig.page.waitFor(ig.elements.addInstagramToHome, { timeout: 1000 });
       const cancelButton = await ig.page.$x(ig.elements.cancelButton);
       await cancelButton[0].click();
-      await ig.utils.log({"message" : "Add Instagram to your Home screen?"} )
+      await ig.utils.log({ "message": "Add Instagram to your Home screen?" })
       console.log("Add Instagram to your Home screen?")
       ig.utils.saveCookies(instagram)
 
     } catch (e) { }
 
-    try {
-      await ig.page.waitFor(ig.elements.turnOnNotifications, { timeout: 1000 });
-      const notNowButton = await ig.page.$x(ig.elements.notNowButton);
-      await notNowButton[0].click();
-      console.log("Turn on Notifications");
-    } catch (e) { }
+    // try {
+    //   await ig.page.waitFor(ig.elements.turnOnNotifications, { timeout: 1000 });
+    //   const notNowButton = await ig.page.$x(ig.elements.notNowButton);
+    //   await notNowButton[0].click();
+    //   console.log("Turn on Notifications");
+    // } catch (e) { }
 
-    try {
-      await ig.page.waitFor(ig.elements.xButtonFindMore, { timeout: 1000 });
-      const notNowButton = await ig.page.$x(ig.elements.xButtonFindMore);
-      await notNowButton[0].click();
-      console.log("Close Find More");
-    } catch (e) { }
+    // try {
+    //   await ig.page.waitFor(ig.elements.xButtonFindMore, { timeout: 1000 });
+    //   const notNowButton = await ig.page.$x(ig.elements.xButtonFindMore);
+    //   await notNowButton[0].click();
+    //   console.log("Close Find More");
+    // } catch (e) { }
 
-    try {
-      await ig.page.waitFor(ig.elements.saveLoginInfo, { timeout: 30000 });
-      const saveLoginInfo = await ig.page.$x(ig.elements.saveLoginInfo);
-      await saveLoginInfo[0].click();
-      console.log("Save Login Info")
-    } catch (e) { }
+    // try {
+    //   await ig.page.waitFor(ig.elements.saveLoginInfo, { timeout: 30000 });
+    //   const saveLoginInfo = await ig.page.$x(ig.elements.saveLoginInfo);
+    //   await saveLoginInfo[0].click();
+    //   console.log("Save Login Info")
+    // } catch (e) { }
 
-    try {
-      await ig.page.waitFor(ig.elements.actionBlocked, { timeout: 1000 });
-      console.log("Action Blocked")
-      await ig.page.screenshot({path: 'action-blocked.png'});
-      await ig.utils.log({"message" : "Action Blocked"} )
-      return "Action Blocked"
-    } catch (e) { }
+    // try {
+    //   await ig.page.waitFor(ig.elements.actionBlocked, { timeout: 1000 });
+    //   console.log("Action Blocked")
+    //   await ig.page.screenshot({ path: 'action-blocked.png' });
+    //   await ig.utils.log({ "message": "Action Blocked" })
+    //   return "Action Blocked"
+    // } catch (e) { }
 
-    try {
-      await ig.page.waitFor(ig.elements.wait, { timeout: 1000 });
-      console.log("wait")
-      await ig.utils.log({"message" : "wait"} )
-      return "wait"
-    } catch (e) { }
+    // try {
+    //   await ig.page.waitFor(ig.elements.wait, { timeout: 1000 });
+    //   console.log("wait")
+    //   await ig.utils.log({ "message": "wait" })
+    //   return "wait"
+    // } catch (e) { }
 
-    try {
-      await ig.page.waitFor(ig.elements.error, { timeout: 1000 });
-      console.log("wait")
-      await ig.utils.log({"message" : "error"} )
-      return "error"
-    } catch (e) { }
+    // try {
+    //   await ig.page.waitFor(ig.elements.error, { timeout: 1000 });
+    //   console.log("wait")
+    //   await ig.utils.log({ "message": "error" })
+    //   return "error"
+    // } catch (e) { }
 
-    try {
-      await ig.page.waitFor(ig.elements.temporaryBlocked, { timeout: 1000 });
-      console.log("Teamporary Blocked")
-      const notNowButton = await ig.page.$x(ig.elements.reportProblem);
-      await notNowButton[0].click();
-      await ig.utils.log({"message" : "Temporary Blocked"} )
-      return "Temporary Blocked"
-    } catch (e) { }
+    // try {
+    //   await ig.page.waitFor(ig.elements.temporaryBlocked, { timeout: 1000 });
+    //   console.log("Teamporary Blocked")
+    //   const notNowButton = await ig.page.$x(ig.elements.reportProblem);
+    //   await notNowButton[0].click();
+    //   await ig.utils.log({ "message": "Temporary Blocked" })
+    //   return "Temporary Blocked"
+    // } catch (e) { }
 
   },
   goBack: async () => {
@@ -272,12 +272,12 @@ elements : {
       const followingButton = await ig.page.waitFor(ig.elements.followingButton, { timeout: 3000 });
       return true
     } catch (e) {
-	try {
-		const followingButton = await ig.page.waitFor(ig.elements.followBackButton, { timeout: 3000 });	
-		return true;
-	} catch (e) {
-		return false;
-	}
+      try {
+        const followingButton = await ig.page.waitFor(ig.elements.followBackButton, { timeout: 3000 });
+        return true;
+      } catch (e) {
+        return false;
+      }
     }
   },
 
@@ -438,7 +438,7 @@ elements : {
       await linkHandlers[Math.min(linkHandlers.length, nr - 1)].click();
       return await ig.waitPostPage();
     } catch (e) {
-      await ig.utils.log({"error" : "openPost", "url" : ig.page.url()} )
+      await ig.utils.log({ "error": "openPost", "url": ig.page.url() })
       console.log('error openPost', e)
       return false;
     }
@@ -451,7 +451,7 @@ elements : {
       await button.click(),
         await ig.waitProfilePage();
     } catch (e) {
-      await ig.utils.log({"error" : "openProfile", "url" : ig.page.url()} )
+      await ig.utils.log({ "error": "openProfile", "url": ig.page.url() })
 
       console.log("openProfile Error", e)
     }
@@ -478,7 +478,7 @@ elements : {
       await ig.page.waitFor(ig.elements.textPhoto, { timeout: 6000 });
       return true;
     } catch (e) {
-      await ig.utils.log({"error" : "waitPostPage", "url" : ig.page.url()} )
+      await ig.utils.log({ "error": "waitPostPage", "url": ig.page.url() })
 
       return false;
     }
@@ -491,7 +491,7 @@ elements : {
       await button.click(),
         await ig.waitActivityPage();
     } catch (e) {
-      await ig.utils.log({"error" : "openActivity", "url" : ig.page.url()} )
+      await ig.utils.log({ "error": "openActivity", "url": ig.page.url() })
       console.log("openActivity Error", e)
     }
   },
@@ -501,7 +501,7 @@ elements : {
     try {
       await ig.page.waitFor(ig.elements.activityText, { timeout: 6000 });
     } catch (e) {
-      await ig.utils.log({"error" : "waitActivityPage", "url" : ig.page.url()} )
+      await ig.utils.log({ "error": "waitActivityPage", "url": ig.page.url() })
       console.log('waitActivityPage Error', e, ig.page.url())
     }
   },
@@ -522,10 +522,10 @@ elements : {
         await ig.utils.saveCookies(instagram)
         return true;
       } catch (e) {
-        await ig.utils.log({"error" : "likePost", "url" : ig.page.url(), "error message" : e} )
+        await ig.utils.log({ "error": "likePost", "url": ig.page.url(), "error message": e })
         return false;
       }
-   }
+    }
   },
 
   openComments: async () => {
@@ -537,7 +537,7 @@ elements : {
       await ig.page.waitFor(ig.elements.textComments, { timeout: 3000 });
       return true;
     } catch (e) {
-      await ig.utils.log({"error" : "openComments", "url" : ig.page.url()} )
+      await ig.utils.log({ "error": "openComments", "url": ig.page.url() })
       console.log('openComments', e, ig.page.url());
       return false;
     }
@@ -552,7 +552,7 @@ elements : {
       await ig.waitProfilePage();
       return true;
     } catch (e) {
-      await ig.utils.log({"error" : "openPostUser", "url" : ig.page.url()} )
+      await ig.utils.log({ "error": "openPostUser", "url": ig.page.url() })
       console.log(e, ig.page.url());
       return false;
     }
@@ -687,7 +687,7 @@ elements : {
       await sendButton[0].click();
       await ig.page.waitFor(1000);
     } catch (e) {
-      await ig.utils.log({"error" : "sendSampleMessage", "url" : ig.page.url()} )
+      await ig.utils.log({ "error": "sendSampleMessage", "url": ig.page.url() })
       console.log("can't send message");
       return { "status": "Can't send message. You might be blocked." }
     }
@@ -708,41 +708,82 @@ elements : {
     await ig.cancelMessage();
     try {
 
-      let article = await ig.page.$('article');
-
-      await ig.page.evaluate((ele) => {
-        ele.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest'
-        });
-      }, article);
-
+      let article = null;
       let count = 0;
       while (viewStoriesCount > count) {
         console.log(count + 1);
 
-        article = await ig.page.evaluateHandle(el => el.nextElementSibling, article);
+        await ig.turnOffNotification();
 
-        const type = await article.evaluate(node => node.tagName);
+        if (count === 0) {
+          article = await ig.page.$('article');
 
-        if (type === 'ARTICLE') {
-          await ig.turnOffNotification();
           await ig.page.evaluate((ele) => {
             ele.scrollIntoView({
               behavior: 'smooth',
               block: 'nearest'
             });
           }, article);
+
+          await ig.likePostByArticleNode(article);
           count++;
         } else {
-          console.log('skip node other then article');
+
+          article = await ig.page.evaluateHandle(el => el.nextElementSibling, article);
+
+          const type = await article.evaluate(node => node.tagName);
+
+          if (type === 'ARTICLE') {
+            await ig.page.evaluate((ele) => {
+              ele.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+              });
+            }, article);
+
+            await ig.likePostByArticleNode(article);
+
+            count++;
+          } else {
+            console.log('skip node other then article');
+          }
         }
-        await ig.utils.sleep(1000);
+
+        await ig.utils.sleep(2000);
       }
 
     } catch (e) { console.log(e); }
     await ig.utils.sleep(2000);
   },
+
+  likePostByArticleNode: async (element) => {
+    try {
+      await ig.utils.sleep(1500);
+      const likeButtonXpath = await ig.createXPathFromElement(element) + '/div[2]/section[1]/span[1]/button';
+      await ig.page.evaluate((element) => {
+        const likeButtonEle = document.evaluate(element, document, null, XPathResult.ANY_TYPE, null);
+        const likeButton = likeButtonEle.iterateNext();
+        likeButton && likeButton.click();
+      }, likeButtonXpath);
+      console.log('click done');
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
+  createXPathFromElement: async (ele) => {
+    return await ig.page.evaluate((element) => {
+      const idx = (sib, name) => sib
+        ? idx(sib.previousElementSibling, name || sib.localName) + (sib.localName == name)
+        : 1;
+      const segs = elm => !elm || elm.nodeType !== 1
+        ? ['']
+        : elm.id && document.getElementById(elm.id) === elm
+          ? [`id("${elm.id}")`]
+          : [...segs(elm.parentNode), `${elm.localName.toLowerCase()}[${idx(elm)}]`];
+      return segs(element).join('/');
+    }, ele);
+  }
 
 };
 
