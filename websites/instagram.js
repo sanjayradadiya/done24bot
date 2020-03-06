@@ -171,7 +171,7 @@ const ig = {
       await cancelButton[0].click();
       await ig.utils.log({ "message": "Add Instagram to your Home screen?" })
       console.log("Add Instagram to your Home screen?")
-      ig.utils.saveCookies(instagram)
+      ig.utils.saveCookies(ig)
 
     } catch (e) { }
 
@@ -507,25 +507,33 @@ const ig = {
   },
 
   likePost: async () => {
+
+    return new Promise((resolve, reject) => {
+
     ig.cancelMessage();
     console.log('likePost', ig.page.url());
 
+    ig.page.waitFor(ig.elements.postFilledHeart, { timeout: 100 })
+	.then( () => {
+	      console.log('Already been liked');
+      	      resolve();
+	}).catch ( async () => {
     try {
-      const likeButton = await ig.page.waitFor(ig.elements.postFilledHeart, { timeout: 100 });
-      return false; // already been liked
-    } catch (e) {
-      try {
         const likeButton = await ig.page.waitFor(ig.elements.postUnfilledHeart, { timeout: 3000 });
         await likeButton.click();
         await ig.utils.sleep(500);
         await ig.page.waitFor(ig.elements.postFilledHeart, { timeout: 3000 });
-        await ig.utils.saveCookies(instagram)
-        return true;
-      } catch (e) {
+        await ig.utils.saveCookies(ig);
+	let log = await ig.utils.log({"message" : "like" , "instagram" : ig.username, "url" : ig.page.url()} )
+        resolve(log);
+    } catch (e) {
+	console.log('likePost error', e)
         await ig.utils.log({ "error": "likePost", "url": ig.page.url(), "error message": e })
-        return false;
-      }
+        reject(false);
     }
+    })
+
+   })
   },
 
   openComments: async () => {
@@ -765,9 +773,10 @@ const ig = {
         const likeButton = likeButtonEle.iterateNext();
         likeButton && likeButton.click();
       }, likeButtonXpath);
-      console.log('click done');
+      let log = await ig.utils.log({"message" : "like" , "instagram" : ig.username, "url" : ig.page.url()} )
+      return(log)
     } catch (e) {
-      console.log(e);
+      await ig.utils.log({ "error": "likePostByArticleNode", "url": ig.page.url(), "error" : e })
     }
   },
 

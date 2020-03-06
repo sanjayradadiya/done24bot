@@ -9,8 +9,9 @@ parameters:null,
 
 init: async() => {
 	console.log('init...');
-	var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/instagram.js')
-        ig.bot = await ig.utils.requireFromString(module)
+	ig.bot = require('./websites/instagram.js');
+//	var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/instagram.js')
+//        ig.bot = await ig.utils.requireFromString(module)
 	ig.bot.utils = ig.utils;
 },
 
@@ -33,7 +34,6 @@ process: async () => {
 		cb(null);
 	}
 
-	await ig.bot.likePost();
         await ig.bot.commentLike(ig.utils.randomIntInc(1, 4))
 	await ig.utils.sleep(3000);
 	await ig.bot.openActivity();
@@ -42,12 +42,13 @@ process: async () => {
 	await ig.bot.openProfile();
 
 	for (var i = 1; i < 200; i++) { /// loop on my posts
-		//var profile = await ig.bot.getProfileData();
-		//console.log('profile' , profile);
 		console.log('await ig.bot.openPost(i);')
 		await ig.bot.openPost(i);
-		await ig.bot.likePost();
-		let log = await ig.utils.log({"message" : "like" , "instagram" : ig.bot.username, "url" : ig.bot.page.url()})
+		let log = await ig.bot.likePost();
+	   	if (log && log.wait > 0) {
+                     console.log('wait ' + log.wait)
+                     await ig.utils.sleep(log.wait);
+                }	
 		await ig.bot.openComments()
 		await ig.bot.commentLike(ig.utils.randomIntInc(1, 4))
 		var tags = await ig.bot.getHashtags();
@@ -73,16 +74,11 @@ process: async () => {
 					var oo = await ig.bot.openPost(9 + j)
 					console.log('await ig.bot.openPost(9 + j)', j, oo, ig.bot.page.url());
 					if(oo) {
-						var like = await ig.bot.likePost();
+						let like = await ig.bot.likePost()
 						if(!like) {already_liked--;}
-						if(like) {
-							let log = await ig.utils.log({"message" : "like" , "instagram" : ig.bot.username, "url" : ig.bot.page.url()} )
-							console.log('log wait', log.wait)
-
-							if (log.wait > 0) {
-								console.log('wait ' + log.wait)
-								await ig.utils.sleep(log.wait);
-							}
+						if (like && like.wait > 0) {
+							console.log('wait ' + log.wait)
+							await ig.utils.sleep(log.wait);
 						}
 						var comment = await ig.bot.openComments()
 						if(comment) {
