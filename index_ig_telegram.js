@@ -17,34 +17,39 @@ init: async() => {
 	console.log(ig.urls);
 },
 
+like_posts: async () => {
+
+	for (var i = 1; i < ig.urls.length; i++) { /// loop on my posts 
+                await ig.bot.page.goto('https://www.instagram.com/p/' + ig.urls[i] + '/');
+                
+                var like = await ig.bot.likePost();
+                if (like && like.wait > 0) {
+                    console.log('wait ' + log.wait)
+                    await ig.utils.sleep(log.wait);
+                }
+                await ig.utils.sleep(3000);
+        }
+
+
+}
+
 process: async () => {
 	console.log('process');
         let log = await ig.utils.log({"filename" : "index_ig_like", "function" : "process", "url" : ig.bot.page.url(), "instagram" : ig.bot.username });
 
-
 	const loginData = await ig.bot.login();
 
-	await ig.utils.saveCookies(ig.bot).catch(function(error) {
-		console.log(error);
-	});
+	while(ig.urls.length > 0)
+		await ig.utils.saveCookies(ig.bot).catch(function(error) {
+            	    console.log(error);
+        	});  
 
-		
-	for (var i = 1; i < ig.urls.length; i++) { /// loop on my posts
-		await ig.bot.page.goto('https://www.instagram.com/p/' + ig.urls[i] + '/');
-
-		var like = await ig.bot.likePost();
-                if(like) {
-                     let log = await ig.utils.log({"message" : "like" , "instagram" : ig.bot.username, "url" : ig.bot.page.url()} )
-                     console.log('log wait', log.wait)
-                                        
-                     if (log.wait > 0) {
-                           console.log('wait ' + log.wait)
-                           await ig.utils.sleep(log.wait);
-                     }
-                }     
-		await ig.utils.sleep(3000);
+		ig.urls = await utils.data ({"method" : "GET", "endpoint" : 'tglist',  "headers" : { "telegram_id" : ig.parameters.v_user_id} })
+        	ig.urls = ig.urls.urls;
+		ig.like_posts();
 	}
-	await ig.bot.goHome();
+
+	alert('All telegram links been liked now');
 }
 }
 
