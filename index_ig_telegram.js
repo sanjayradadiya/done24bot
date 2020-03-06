@@ -31,7 +31,7 @@ like_posts: async () => {
         }
 
 
-}
+},
 
 process: async () => {
 	console.log('process');
