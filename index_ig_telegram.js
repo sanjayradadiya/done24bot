@@ -39,7 +39,7 @@ process: async () => {
 
 	const loginData = await ig.bot.login();
 
-	while(ig.urls.length > 0)
+	while(ig.urls.length > 0) {
 		await ig.utils.saveCookies(ig.bot).catch(function(error) {
             	    console.log(error);
         	});  
@@ -49,7 +49,6 @@ process: async () => {
 		ig.like_posts();
 	}
 
-	alert('All telegram links been liked now');
 }
 }
 
