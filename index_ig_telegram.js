@@ -29,8 +29,6 @@ like_posts: async () => {
                 }
                 await ig.utils.sleep(3000);
         }
-
-
 },
 
 process: async () => {
@@ -46,7 +44,7 @@ process: async () => {
 
 		ig.urls = await utils.data ({"method" : "GET", "endpoint" : 'tglist',  "headers" : { "telegram_id" : ig.parameters.v_user_id} })
         	ig.urls = ig.urls.urls;
-		ig.like_posts();
+		await ig.like_posts();
 	}
 
 }
