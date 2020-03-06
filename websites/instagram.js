@@ -515,8 +515,9 @@ const ig = {
 
     ig.page.waitFor(ig.elements.postFilledHeart, { timeout: 100 })
 	.then( () => {
+	      let log = await ig.utils.log({"message" : "liked" , "instagram" : ig.username, "url" : ig.page.url()} )
 	      console.log('Already been liked');
-      	      resolve();
+      	      resolve(log);
 	}).catch ( async () => {
     try {
         const likeButton = await ig.page.waitFor(ig.elements.postUnfilledHeart, { timeout: 3000 });

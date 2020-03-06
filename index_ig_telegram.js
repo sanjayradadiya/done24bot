@@ -14,7 +14,7 @@ init: async() => {
 	console.log('....loading urls');
 	ig.urls = await utils.data ({"method" : "GET", "endpoint" : 'tglist',  "headers" : { "telegram_id" : ig.parameters.v_user_id} })
 	ig.urls = ig.urls.urls;
-	console.log(ig.urls);
+	console.log('urls:', ig.urls);
 },
 
 like_posts: async () => {
@@ -36,7 +36,6 @@ process: async () => {
         let log = await ig.utils.log({"filename" : "index_ig_like", "function" : "process", "url" : ig.bot.page.url(), "instagram" : ig.bot.username });
 
 	const loginData = await ig.bot.login();
-
 	while(ig.urls.length > 0) {
 		await ig.utils.saveCookies(ig.bot).catch(function(error) {
             	    console.log(error);
@@ -44,6 +43,7 @@ process: async () => {
 
 		ig.urls = await utils.data ({"method" : "GET", "endpoint" : 'tglist',  "headers" : { "telegram_id" : ig.parameters.v_user_id} })
         	ig.urls = ig.urls.urls;
+		console.log('start loop');
 		await ig.like_posts();
 	}
 
