@@ -37,7 +37,7 @@ const ig = {
         await ig.utils.sleep(1000);
 
         try {
-            await ig.bot.mainFeed(ig.parameters.nr_of_likes);
+            await ig.bot.mainFeedLike(ig.parameters.nr_of_likes);
         } catch (e) {
             console.log(e);
         }
