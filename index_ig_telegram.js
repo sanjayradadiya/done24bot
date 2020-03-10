@@ -22,8 +22,9 @@ like_posts: async () => {
 	for (var i = 1; i < ig.urls.length; i++) { /// loop on my posts 
                 await ig.bot.page.goto('https://www.instagram.com/p/' + ig.urls[i] + '/');
                 
-                var like = await ig.bot.likePost();
-                if (like && like.wait > 0) {
+                var log = await ig.bot.likePost();
+                if (log.wait > 0) {
+		    console.log(log);
                     console.log('wait ' + log.wait)
                     await ig.utils.sleep(log.wait);
                 }
