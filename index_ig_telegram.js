@@ -19,7 +19,7 @@ init: async() => {
 
 like_posts: async () => {
 
-	for (var i = 1; i < ig.urls.length; i++) { /// loop on my posts 
+	for (var i = 0; i < ig.urls.length; i++) { /// loop on my posts 
                 await ig.bot.page.goto('https://www.instagram.com/p/' + ig.urls[i] + '/');
                 
                 var log = await ig.bot.likePost();
@@ -37,7 +37,9 @@ process: async () => {
         let log = await ig.utils.log({"filename" : "index_ig_like", "function" : "process", "url" : ig.bot.page.url(), "instagram" : ig.bot.username });
 
 	const loginData = await ig.bot.login();
+	console.log('logged in ...', ig.urls.length)
 	while(ig.urls.length > 0) {
+		console.log('urls:', ig.urls)
 		await ig.utils.saveCookies(ig.bot).catch(function(error) {
             	    console.log(error);
         	});  
