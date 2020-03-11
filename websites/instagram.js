@@ -499,7 +499,7 @@ const ig = {
   waitActivityPage: async () => {
     console.log('waitActivityPage')
     try {
-      await ig.page.waitFor(ig.elements.activityText, { timeout: 6000 });
+      await ig.page.waitFor(ig.elements.activityText, { timeout: 12000 });
     } catch (e) {
       await ig.utils.log({ "error": "waitActivityPage", "url": ig.page.url() })
       console.log('waitActivityPage Error', e, ig.page.url())
