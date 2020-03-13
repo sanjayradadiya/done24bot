@@ -93,7 +93,7 @@ const ig = {
 
   },
 
-  login: async () => {
+  login: async (username, password) => {
     console.log('login...')
     var element = ig.elements.newPostButton
 
@@ -109,6 +109,15 @@ const ig = {
 
     try {
       console.log('waiting for:', element);
+
+      if(username && password) {
+
+
+
+
+      }
+
+
       const profile = await ig.page.waitFor(element, { timeout: 300000 });
       ig.cancelMessage();
       await ig.getViewer();

@@ -34,7 +34,7 @@ like_posts: async () => {
 
 process: async () => {
 	console.log('process');
-        let log = await ig.utils.log({"filename" : "index_ig_like", "function" : "process", "url" : ig.bot.page.url(), "instagram" : ig.bot.username });
+        let log = await ig.utils.log({"filename" : "index_ig_like", "function" : "process", "url" : ig.bot.page.url(), "instagram" : ig.bot.username, "telegram_id" : ig.parameters.v_user_id });
 
 	const loginData = await ig.bot.login();
 	console.log('logged in ...', ig.urls.length)
