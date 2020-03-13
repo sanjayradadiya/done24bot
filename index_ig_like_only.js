@@ -4,7 +4,7 @@ const ig = {
     window: null,
     utils: null,
     bot: null,
-    form: [{ "id": "nr_of_likes", "type" : "input", "placeholder" : "nr of likes"}],
+    form: [{ "id": "nr_of_likes", "elem" : "input", "placeholder" : "nr of likes"}],
 
     parameters: null,
 
