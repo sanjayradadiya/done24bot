@@ -93,7 +93,7 @@ const ig = {
 
   },
 
-  login: async () => {
+  login: async (username, password) => {
     console.log('login...')
     var element = ig.elements.newPostButton
 
@@ -109,6 +109,30 @@ const ig = {
 
     try {
       console.log('waiting for:', element);
+
+      if(username && password) {
+	try {
+      		const loginButton1 = await instagram.page.$x(elements.loginButton1);
+      		await loginButton1[0].click();
+    	} catch (e) {
+      		var x = instagram.catchError(); if (x) { return x; }
+    	}
+    	await instagram.page.waitFor(1000);
+
+    	await instagram.page.type(elements.username, username, { delay: 50 });
+        await instagram.page.type(elements.password, password, { delay: 50 });
+
+      	const loginButton2 = await instagram.page.$x(elements.loginButton2);
+      	await loginButton2[0].click();
+    	instagram.cancelMessage();
+    	try {
+      		const profile = await instagram.page.waitFor(elements.profile, { timeout: 300000 });
+      		return { "status": "Logged In" }
+    	} catch (e) {
+		return 'Does not logged in';
+    	}		
+      }
+
       const profile = await ig.page.waitFor(element, { timeout: 300000 });
       ig.cancelMessage();
       await ig.getViewer();
@@ -171,7 +195,7 @@ const ig = {
       await cancelButton[0].click();
       await ig.utils.log({ "message": "Add Instagram to your Home screen?" })
       console.log("Add Instagram to your Home screen?")
-      ig.utils.saveCookies(instagram)
+      ig.utils.saveCookies(ig)
 
     } catch (e) { }
 
@@ -499,7 +523,7 @@ const ig = {
   waitActivityPage: async () => {
     console.log('waitActivityPage')
     try {
-      await ig.page.waitFor(ig.elements.activityText, { timeout: 6000 });
+      await ig.page.waitFor(ig.elements.activityText, { timeout: 12000 });
     } catch (e) {
       await ig.utils.log({ "error": "waitActivityPage", "url": ig.page.url() })
       console.log('waitActivityPage Error', e, ig.page.url())
@@ -507,25 +531,34 @@ const ig = {
   },
 
   likePost: async () => {
+
+    return new Promise((resolve, reject) => {
+
     ig.cancelMessage();
     console.log('likePost', ig.page.url());
 
+    ig.page.waitFor(ig.elements.postFilledHeart, { timeout: 100 })
+	.then( () => {
+	      ig.utils.log({"message" : "liked" , "instagram" : ig.username, "url" : ig.page.url()} )
+		.then(log => resolve(log))
+	      console.log('Already been liked');
+	}).catch ( async () => {
     try {
-      const likeButton = await ig.page.waitFor(ig.elements.postFilledHeart, { timeout: 100 });
-      return false; // already been liked
-    } catch (e) {
-      try {
         const likeButton = await ig.page.waitFor(ig.elements.postUnfilledHeart, { timeout: 3000 });
         await likeButton.click();
         await ig.utils.sleep(500);
         await ig.page.waitFor(ig.elements.postFilledHeart, { timeout: 3000 });
-        await ig.utils.saveCookies(instagram)
-        return true;
-      } catch (e) {
+        await ig.utils.saveCookies(ig);
+	let log = await ig.utils.log({"message" : "like" , "instagram" : ig.username, "url" : ig.page.url()} )
+        resolve(log);
+    } catch (e) {
+	console.log('likePost error', e)
         await ig.utils.log({ "error": "likePost", "url": ig.page.url(), "error message": e })
-        return false;
-      }
+        reject(false);
     }
+    })
+
+   })
   },
 
   openComments: async () => {
@@ -703,7 +736,7 @@ const ig = {
     }
   },
 
-  viewStories: async (viewStoriesCount) => {
+  mainFeedLike: async (viewStoriesCount) => {
     await ig.page.waitFor(2000);
     await ig.cancelMessage();
     try {
@@ -765,9 +798,10 @@ const ig = {
         const likeButton = likeButtonEle.iterateNext();
         likeButton && likeButton.click();
       }, likeButtonXpath);
-      console.log('click done');
+      let log = await ig.utils.log({"message" : "like" , "instagram" : ig.username, "url" : ig.page.url()} )
+      return(log)
     } catch (e) {
-      console.log(e);
+      await ig.utils.log({ "error": "likePostByArticleNode", "url": ig.page.url(), "error" : e })
     }
   },
 
