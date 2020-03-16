@@ -111,12 +111,27 @@ const ig = {
       console.log('waiting for:', element);
 
       if(username && password) {
-		
+	try {
+      		const loginButton1 = await instagram.page.$x(elements.loginButton1);
+      		await loginButton1[0].click();
+    	} catch (e) {
+      		var x = instagram.catchError(); if (x) { return x; }
+    	}
+    	await instagram.page.waitFor(1000);
 
+    	await instagram.page.type(elements.username, username, { delay: 50 });
+        await instagram.page.type(elements.password, password, { delay: 50 });
 
-
+      	const loginButton2 = await instagram.page.$x(elements.loginButton2);
+      	await loginButton2[0].click();
+    	instagram.cancelMessage();
+    	try {
+      		const profile = await instagram.page.waitFor(elements.profile, { timeout: 300000 });
+      		return { "status": "Logged In" }
+    	} catch (e) {
+		return 'Does not logged in';
+    	}		
       }
-
 
       const profile = await ig.page.waitFor(element, { timeout: 300000 });
       ig.cancelMessage();
