@@ -148,7 +148,7 @@ const ig = {
     	}		
       }
 
-      const profile = await ig.page.waitFor(ig.element, { timeout: 300000 });
+      const profile = await ig.page.waitFor(element, { timeout: 300000 });
       ig.cancelMessage();
       await ig.getViewer();
       return { "status": "Logged In" }
