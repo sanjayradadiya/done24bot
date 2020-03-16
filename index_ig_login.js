@@ -16,7 +16,7 @@ process: async () => {
         let log = await ig.utils.log({"filename" : "index_ig_login", "function" : "process", "url" : ig.bot.page.url(), "instagram" : ig.bot.username });
 
 	const loginData = await ig.bot.login();
-	console.log('logged in ...', ig.urls.length)
+	console.log('logged in ...')
 }
 }
 
