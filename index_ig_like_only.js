@@ -38,8 +38,10 @@ const ig = {
 
         try {
             await ig.bot.mainFeedLike(ig.parameters.nr_of_likes);
+	    return 'index_ig_like_only script is finished';
         } catch (e) {
             console.log(e);
+	    return 'error happened in the index_ig_like_only.js';
         }
 
     },

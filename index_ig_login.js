@@ -22,6 +22,8 @@ process: async () => {
 	await ig.utils.saveCookies(ig.bot).catch(function(error) {
                 console.log(error);
         });
+
+	return 'Logged in';
 }
 }
 
