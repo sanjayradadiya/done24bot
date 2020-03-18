@@ -113,18 +113,22 @@ const ig = {
       console.log('Logging in...')
     }
 
-    ig.cancelMessage();
+    // ig.cancelMessage();
 
     try {
       console.log('waiting for:', element);
 
       if(username && password) {
 	console.log('username/password login')
-	await ig.utils.click(ig, ig.elements.removeAccountButton , 5000)
-	await ig.utils.click(ig, ig.elements.removeButton , 5000)
+	var x = await ig.utils.click(ig, ig.elements.removeAccountButton , 5000)
+	if (x) {
+		await ig.utils.click(ig, ig.elements.removeButton , 5000)
+	}
 	await ig.utils.click(ig, ig.elements.loginButton1 , 5000)
-    
-	await ig.page.waitFor(ig.elements.username, { timeout: 5000 });	
+
+   	await ig.utils.sleep(1500);
+ 
+	await ig.page.waitFor(ig.elements.username, { timeout: 10000 });	
     	await ig.page.type(ig.elements.username, username, { delay: 50 });
         await ig.page.type(ig.elements.password, password, { delay: 50 });
 
