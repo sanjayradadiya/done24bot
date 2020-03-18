@@ -124,15 +124,13 @@ const ig = {
 	await ig.utils.click(ig, ig.elements.removeButton , 5000)
 	await ig.utils.click(ig, ig.elements.loginButton1 , 5000)
     
-	await ig.page.waitFor(5000);	
-	
+	await ig.page.waitFor(ig.elements.username, { timeout: 5000 });	
     	await ig.page.type(ig.elements.username, username, { delay: 50 });
         await ig.page.type(ig.elements.password, password, { delay: 50 });
 
 	await ig.utils.click(ig, ig.elements.loginButton2 , 2000);
 
-	await ig.page.waitFor(5000);
-
+	await ig.page.waitFor(ig.elements.notNowButton,  { timeout: 3000 });
 	await ig.utils.click(ig, ig.elements.notNowButton , 2000);
 	await ig.utils.click(ig, ig.elements.notNowButton , 2000);
 	await ig.utils.click(ig, ig.elements.cancelButton , 2000);
