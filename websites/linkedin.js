@@ -87,6 +87,12 @@ const li = {
 				if (count === 0) {
 					article = await li.page.$('ol#feed-container > li.feed-item');
 
+					const totalArticle = (await li.page.$$('ol#feed-container > li.feed-item')).length;
+
+					if (totalArticle === 0) {
+						break;
+					}
+
 					await li.page.evaluate((ele) => {
 						ele.scrollIntoView({
 							behavior: 'smooth',
@@ -99,6 +105,10 @@ const li = {
 				} else {
 
 					article = await li.page.evaluateHandle(el => el.nextElementSibling, article);
+
+					if (!article) {
+						break;
+					}
 
 					const type = await article.evaluate(node => node.tagName);
 
@@ -121,7 +131,7 @@ const li = {
 				await li.utils.sleep(2000);
 			}
 
-		} catch (e) { console.log(e); }
+		} catch (e) { }
 		await li.utils.sleep(2000);
 	},
 
