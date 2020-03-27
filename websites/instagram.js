@@ -87,7 +87,7 @@ const ig = {
   checkLogin: async () => {
 
     try {
-      var wait = 10000;
+      var wait = 'networkidle0';
       if(username && password) {
 	wait = 3000;
       }
@@ -106,7 +106,7 @@ const ig = {
     var element = ig.elements.newPostButton
 
     try {
-      const profile = await ig.page.waitFor(element, { timeout: 3000 });
+      const profile = await ig.page.waitFor(element, { waitUntil: 'networkidle0' });
       await ig.getViewer();
       return { "status": "Logged In" }
     } catch (e) {
