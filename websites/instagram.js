@@ -129,9 +129,9 @@ const ig = {
 
       if(username && password) {
 	console.log('username/password login')
-	var x = await ig.utils.click(ig, ig.elements.removeAccountButton , 5000)
+	var x = await ig.utils.click(ig, ig.elements.removeAccountButton , 1000)
 	if (x) {
-		await ig.utils.click(ig, ig.elements.removeButton , 5000)
+		await ig.utils.click(ig, ig.elements.removeButton , 3000)
 	}
 	await ig.utils.click(ig, ig.elements.loginButton1 , 5000)
 
