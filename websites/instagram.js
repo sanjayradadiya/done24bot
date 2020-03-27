@@ -106,11 +106,20 @@ const ig = {
     var element = ig.elements.newPostButton
 
     try {
-      const profile = await ig.page.waitFor(element, { waitUntil: 'networkidle0' });
-      await ig.getViewer();
-      return { "status": "Logged In" }
+      try {
+        await ig.utils.click(ig, ig.elements.loginButton1 , 500)
+	console.log('Logging in...');
+      } catch(e) {
+	var wait = 'networkidle0';
+        if(username && password) {
+          wait = 3000;
+        }
+      	const profile = await ig.page.waitFor(element, { waitUntil: wait });
+      	await ig.getViewer();
+      	return { "status": "Logged In" }
+      }
     } catch (e) {
-      console.log('Logging in...')
+      	console.log('Logging in...')
     }
 
     // ig.cancelMessage();
