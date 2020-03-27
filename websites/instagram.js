@@ -79,13 +79,14 @@ const ig = {
   username: null,
 
   open: async (username, password) => {
-    await ig.page.goto(BASE_URL, { waitUntil: 'networkidle0' });
+    await ig.page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
   },
 
   checkLogin: async () => {
 
     try {
-      const profile = await ig.page.waitFor(ig.elements.profile, { timeout: 10000 });
+      
+      const profile = await ig.page.waitFor(ig.elements.profile, { waitUntil: 'networkidle0' });
       return true
     } catch (e) {
       return false
@@ -98,7 +99,7 @@ const ig = {
     var element = ig.elements.newPostButton
 
     try {
-      const profile = await ig.page.waitFor(element, { timeout: 10000 });
+      const profile = await ig.page.waitFor(element, { waitUntil: 'networkidle0' });
       await ig.getViewer();
       return { "status": "Logged In" }
     } catch (e) {
