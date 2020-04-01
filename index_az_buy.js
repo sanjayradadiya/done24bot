@@ -17,9 +17,8 @@ form: [{ "id": "shopify_url", "elem" : "input", "placeholder" : "shopify_url wit
 
 init: async() => {
 	console.log('init...');
-//	var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/amazon.com.au.js')
-//        ig.bot = await ig.utils.requireFromString(module)
-	ig.bot = require('/Users/gbacskai/done24bot/websites/amazon.com.au.js')
+	var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/amazon.com.au.js')
+        ig.bot = await ig.utils.requireFromString(module)
 	ig.bot.utils = ig.utils;
 
 	var lodash = await ig.utils.httpRequestText('https://raw.githubusercontent.com/lodash/lodash/4.17.15-npm/lodash.js');
@@ -29,7 +28,9 @@ init: async() => {
 
 process: async () => {
 
-        var shopify = require('/Users/gbacskai/done24bot/websites/shopify.js')
+        var module = await ig.utils.httpRequestText('https://raw.githubusercontent.com/xshopper/done24bot/master/websites/shopify.js')
+        var shopify = await ig.utils.requireFromString(module)
+
 	shopify.utils = ig.utils;
 	shopify.initialise(ig.parameters.shopify_url);
 
