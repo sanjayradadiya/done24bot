@@ -111,6 +111,9 @@ process: async () => {
     	console.log('buy', ig.parameters);
     	var url = await ig.bot.buyProducts(ig.parameters);
     	let full = await shopify.setFullfillment(ig.parameters.order_id, url);
+	await ig.utils.saveCookies(ig.bot).catch(function(error) {
+                console.log(error);
+        });
     }
    }
   }
