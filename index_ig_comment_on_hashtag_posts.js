@@ -1,10 +1,12 @@
 const ig = {
     BASE_URL: 'https://instagram.com?utm_source=pwa_homescreen',
-    description: 'Like the main feed on instagram',
+    description: 'Send comment to a specific hastags on the recent posts.',
     window: null,
     utils: null,
     bot: null,
-    form: [{ "id": "nr_of_likes", "elem": "input", "placeholder": "nr of likes", "value": "10" }],
+    form: [{ "id": "nr_of_likes", "elem": "input", "placeholder": "nr of likes", "value": "10" },
+	   { "id": "hashtag", "elem": "input", "placeholder": "Hashtag", "value": "#hashtag" },
+	   { "id": "message", "elem": "input", "placeholder": "Comment", "value": "Hello :)" }],
 
     parameters: null,
 
@@ -17,7 +19,7 @@ const ig = {
 
     process: async () => {
         console.log('process');
-        let log = await ig.utils.log({ "filename": "index_ig_like_only", "function": "process", "url": ig.bot.page.url(), "instagram": ig.bot.username });
+        let log = await ig.utils.log({ "filename": "index_ig_commenter", "function": "process", "url": ig.bot.page.url(), "instagram": ig.bot.username });
 
 
         const loginData = await ig.bot.login();
@@ -37,17 +39,17 @@ const ig = {
         await ig.utils.sleep(1000);
 
         try {
-            await ig.bot.navigateToExampleProfile('#vitaprime');
+            await ig.bot.navigateToExampleProfile(ig.parameters.hashtag);
 
             await ig.bot.openRecentPostOneByOne(ig.parameters.nr_of_likes, async (col, item) => {
                 await ig.bot.openComments();
-                await ig.bot.pastComment('Cool !'); // Please replace custome message here !
+                await ig.bot.pastComment(ig.parameters.message); // Please replace custome message here !
                 await ig.bot.goBack();
             });
-            return 'index_ig_like_only script is finished';
+            return;
         } catch (e) {
             console.log(e);
-            return 'error happened in the index_ig_like_only.js';
+            return 'error happened in the index_ig_commenter.js';
         }
 
     },

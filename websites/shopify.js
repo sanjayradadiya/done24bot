@@ -2,16 +2,23 @@ const shopify = {
 utils: null,
 url : null,
 
-initialise : async (parameters) => {
-	shopify.url = "https://"+parameters.api_key+":"+parameters.password+"@"+parameters.shop+".myshopify.com/admin"
+initialise : async (url) => {
+	shopify.url = url + "/admin"
 },
 
-getOrder: async () => {
-	var since_id = '2130271731808';
-	var myurl = shopify.url + '/orders.json?limit=1&since_id='+since_id+'&status=open&fulfillment_status=unshipped'
+getOrders: async (filters) => {
+	if(filters) {filters = '?' + filters};
+	var myurl = shopify.url + '/orders.json' + filters
 	console.log(myurl)
-	let res = await amazon.utils.httpRequest(myurl).catch(function(err) { console.log('error: ', err); })
+	let res = await shopify.utils.httpRequest(myurl).catch(function(err) { console.log('error: ', err); })
 	return res;
+},
+
+getProduct: async (product_id) => {
+        var myurl = shopify.url + '/products.json?ids='+product_id
+        console.log(myurl)
+        let res = await shopify.utils.httpRequest(myurl).catch(function(err) { console.log('error: ', err); })
+        return res;
 },
 
 setFullfillment: async (order_id, url) => {
@@ -19,7 +26,7 @@ setFullfillment: async (order_id, url) => {
 	var fullfillment = { "fulfillment": { "tracking_urls": [ url ], "notify_customer": true , "location_id" : 18490556512} }
 
 	console.log('fullfillment' , fullfillment);	
-	let res = await amazon.utils.httpRequestPost(myurl,  JSON.stringify(fullfillment)).catch(function(err) { console.log('error: ', err); })
+	let res = await shopify.utils.httpRequestPost(myurl,  JSON.stringify(fullfillment)).catch(function(err) { console.log('error: ', err); })
 	console.log(res)
 	return res;
 }
