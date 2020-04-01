@@ -54,7 +54,8 @@ const element = {
     addYourCard: '//*[contains(text(),"Add your card")]/..//input',
     placeYourOrder: '//*[contains(text(),"Place your order")]/..//input',
     reviewOrder: '//*[text()[contains(.,"Review")]]',
-    trackShipment : '//*[text()[contains(.,"Track shipment")]]'
+    trackShipment : '//*[text()[contains(.,"Track shipment")]]',
+    amazonCartIsEmpty : '//*[contains(text(),"Your Amazon cart is empty")]'
 }
 
 
@@ -64,10 +65,10 @@ const amazon = {
     utils:null,
     element,
 
-    checkLogin: async (in_timeout, bot) => {
+    checkLogin: async (in_timeout) => {
 	console.log('checkLogin', in_timeout);
 	try {
-      		await bot.page.waitFor(element.signedIn, { timeout: in_timeout });
+      		var signedin = await amazon.page.waitFor(element.signedIn, { timeout: in_timeout });
 		console.log('checkLogin true')
 		return true;
    	} catch (e) {
@@ -84,51 +85,63 @@ const amazon = {
         await amazon.page.goto(BASE_URL, { waitUntil: 'networkidle0' });
 
         await amazon.page.waitFor(2000);
-
-        await amazon.page.evaluate((element) => {
+	
+	if(username && password) {
+	  console.log('username password login');
+          await amazon.page.evaluate((element) => {
             const signInButtonEle = document.evaluate(element.signIn, document, null, XPathResult.ANY_TYPE, null);
             const signInButton = signInButtonEle.iterateNext();
             signInButton && signInButton.click();
-        }, amazon.element);
+          }, amazon.element);
 
-        await amazon.page.waitFor(1000);
+          await amazon.page.waitFor(1000);
 
-        await amazon.page.waitFor(amazon.element.usernameInput);
-        await amazon.page.type(amazon.element.usernameInput, username, { delay: 50 });
+          await amazon.page.waitFor(amazon.element.usernameInput);
+          await amazon.page.type(amazon.element.usernameInput, username, { delay: 50 });
 
-        await amazon.page.waitFor(1000);
+          await amazon.page.waitFor(1000);
 
-        await amazon.page.evaluate((element) => {
+          await amazon.page.evaluate((element) => {
             const continueBtnEle = document.evaluate(element.usernameContinue, document, null, XPathResult.ANY_TYPE, null);
             const continueBtn = continueBtnEle.iterateNext();
             continueBtn && continueBtn.click();
-        }, amazon.element);
+          }, amazon.element);
 
-        await amazon.page.waitFor(1000);
+          await amazon.page.waitFor(1000);
 
-        await amazon.page.waitFor(amazon.element.passwordInput);
-        await amazon.page.type(amazon.element.passwordInput, password, { delay: 50 });
+          await amazon.page.waitFor(amazon.element.passwordInput);
+          await amazon.page.type(amazon.element.passwordInput, password, { delay: 50 });
 
-        await amazon.page.waitFor(1000);
+          await amazon.page.waitFor(1000);
 
-        await amazon.page.evaluate((element) => {
+          await amazon.page.evaluate((element) => {
             const signInBtnEle = document.evaluate(element.signInBtn, document, null, XPathResult.ANY_TYPE, null);
             const signInBtn = signInBtnEle.iterateNext();
             signInBtn && signInBtn.click();
-        }, amazon.element);
+          }, amazon.element);
 
+	  let x =  await amazon.checkLogin(2000)
+	  return x;
+	} else {
+		let x = await amazon.checkLogin(6000000);
+		return x;
+	}
 
     },
 
-    searchProducts: async () => {
+    buyProducts: async (parameters) => {
 
+	amazon.parameters = parameters;
+
+	await amazon.home();
 	await amazon.page.waitFor(1000);
-        await amazon.utils.click(amazon, amazon.element.cart, 1000)
-	await amazon.page.waitFor(1000);
 
-	var empty = false;
+	while (!empty) {
+	        await amazon.utils.click(amazon, amazon.element.cart, 1000)
+		await amazon.page.waitFor(1000);
 
-	while (!empty) {	
+		var empty = false;
+
 		try {
 			await amazon.page.waitFor(amazon.element.empytCart , { timeout : 1000 })
 			empty = true
@@ -137,6 +150,11 @@ const amazon = {
         		await amazon.utils.click(amazon, amazon.element.deleteCart, 1000)
 			await amazon.page.waitFor(3000);
 		}
+		
+		try {
+                        await amazon.page.waitFor(amazon.element.amazonCartIsEmpty , { timeout : 1000 })
+                        empty = true
+		} catch(e) {}
 	}
 	await amazon.home();
 
@@ -146,8 +164,8 @@ const amazon = {
 	for(var i=0;i<amazon.parameters.products.length;i++) {
 		await amazon.utils.clearInput(amazon, amazon.element.productSearch);
        		await amazon.page.waitFor(amazon.element.productSearch);
-		console.log("search:" , amazon.parameters.products[i].amazon);
-       		await amazon.page.type(amazon.element.productSearch, amazon.parameters.products[i].amazon, { delay: 50 });
+		console.log("search:" , amazon.parameters.products[i].barcode);
+       		await amazon.page.type(amazon.element.productSearch, amazon.parameters.products[i].barcode, { delay: 50 });
        		await amazon.page.keyboard.press('Enter');
        		await amazon.page.waitFor(3000);
 		await amazon.utils.click(amazon, amazon.element.searchProductNode, 10000)
