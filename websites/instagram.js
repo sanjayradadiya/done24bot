@@ -1,16 +1,19 @@
 const ig = {
 
   elements: {
+    docRoot: 'id("react-root")',
     wait: '//body[contains(@class,"wait-60-sec")]',
     error: '//body[contains(@class,"p-error")]',
     Instagram: '//img[@alt ="Instagram"]',
     loginButton1: '//*[contains(text(), "Log In")]',
     username: 'input[name="username"]',
     password: 'input[name="password"]',
+    postCommentInput: 'textarea[aria-label="Add a comment…"]',
+    postCommentSubmit: '//*[@id="react-root"]/section/main/section/div/form/button',
     loginButton2: '//button/div[contains(text(), "Log In")]',
     removeAccountButton: '//button[contains(text(), "Remove Account")]',
-    removeButton : '//button[text()= "Remove"]',
-    searchButton: '//*[@aria-label="Search & Explore"]',
+    removeButton: '//button[text()= "Remove"]',
+    searchButton: '//*[@id="react-root"]/section/nav[2]/div/div/div[2]/div/div/div[2]/a',
     activityButton: '//*[@aria-label="Activity"]/..',
     activityText: '//h1[contains(text(),"Activity")]/..',
     profileButton: '//*[@aria-label="Profile"]',
@@ -21,7 +24,7 @@ const ig = {
     newPostButton: '//*[contains(@aria-label,"New Post")]',
     saveLoginInfo: '//*[contains(text(),"Save Info")]',
     //firstSearchResult: 'ul > li:first-child > a',
-    correctSearchResult: '//a//div',
+    correctSearchResult: '/html/body/div[1]/section/main/div/div/div/ul/li[1]/a/div/div[2]/div[1]/div/div',
     messagegButton: '//div/button[contains(text(), "Message")]',
     textArea: 'textArea',
     sendMessage: '//div/button[contains(text(), "Send")]',
@@ -240,7 +243,7 @@ const ig = {
     } catch (e) { }
 
     try {
-      await ig.page.waitFor(ig.elements.saveLoginInfo, { timeout: 30000 });
+      await ig.page.waitFor(ig.elements.saveLoginInfo, { timeout: 1000 });
       const saveLoginInfo = await ig.page.waitFor(ig.elements.saveLoginInfo);
       await saveLoginInfo.click();
       console.log("Save Login Info")
@@ -281,8 +284,9 @@ const ig = {
 
   goBack: async () => {
     console.log('goBack');
-    ig.cancelMessage();
+    await ig.cancelMessage();
     try {
+      await ig.page.waitFor(ig.elements.backLink, { timeout: 3000 });
       const backLink = await ig.page.$x(ig.elements.backLink);
       await backLink[0].click();
       await ig.utils.sleep(1000)
@@ -603,6 +607,22 @@ const ig = {
     }
   },
 
+  pastComment: async (comment) => {
+    console.log('pastComment');
+    try {
+      await ig.page.type(ig.elements.postCommentInput, comment, { delay : 50 });
+      await ig.page.waitFor(1000);
+      const commentButton = await ig.page.waitFor(ig.elements.postCommentSubmit, { timeout: 3000 });
+      await commentButton.click();
+      let log = await ig.utils.log({"message" : "comment" , "instagram" : ig.username, "url" : ig.page.url()} )
+      return true;
+    } catch (e) {
+      await ig.utils.log({ "error": "pastComment", "url": ig.page.url() })
+      console.log('pastComment', e, ig.page.url());
+      return false;
+    }
+  },
+
   openPostUser: async () => {
     ig.cancelMessage();
     console.log('openPostUser');
@@ -640,15 +660,13 @@ const ig = {
 
   openSearch: async () => {
 
-    const searchButton = await ig.page.waitFor(ig.elements.searchButton, { timeout: 5000 });
-    await Promise.all([
-      searchButton.click(),
-      ig.page.waitForNavigation({ waitUntil: 'networkidle0' })
-    ]);
+    await ig.page.evaluate((element) => {
+      const searchButtonEle = document.evaluate(element.searchButton, document, null, XPathResult.ANY_TYPE, null);
+      const searchButton = searchButtonEle.iterateNext();
+      searchButton && searchButton.click();
+    }, ig.elements);
 
-    await ig.page.waitFor(ig.elements.searchBar, { timeout: 5000 });
     await ig.utils.sleep(2000);
-
   },
 
   navigateToExampleProfile: async (userhandle) => {
@@ -660,13 +678,90 @@ const ig = {
 
       await ig.page.type(ig.elements.searchBar, userhandle);
 
-      const searchResult = await ig.page.waitFor(`${ig.elements.correctSearchResult}[contains(text(), "${userhandle}")]`, { timeout: 10000 });
-      await searchResult.click();
+      await ig.utils.sleep(2000);
+
+      await ig.page.evaluate((element) => {
+        const SearchResultEle = document.evaluate(element.correctSearchResult, document, null, XPathResult.ANY_TYPE, null);
+        const SearchResult = SearchResultEle.iterateNext();
+        SearchResult && SearchResult.click();
+      }, ig.elements);
 
       return await ig.waitProfilePage()
     } catch (e) {
       console.log(e)
       return { "status": "No Profile" }
+    }
+  },
+
+  openRecentPostOneByOne: async (numberOfPosts, callback) => {
+    await ig.page.waitFor(2000);
+    try {
+
+      let articleCol;
+      let i = 0;
+      let rowCount = 0;
+      const loadPosts = async () => {
+
+        if (rowCount === 0) {
+          articleCol = await ig.page.$('#react-root > section > main > article > div:nth-child(3) > div > div');
+        } else {
+          articleCol = await ig.page.evaluateHandle(el => el.nextSibling, articleCol);
+        }
+
+        if (!articleCol) {
+          return;
+        }
+
+        await ig.page.waitFor(1000);
+
+        await ig.page.evaluate((ele) => {
+          ele.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, articleCol);
+
+        const curretNode = await ig.createXPathFromElement(articleCol);
+
+        for (let j = 1; j <= 3; j++) {
+          const articleRowItemXpath = (rowCount > 0 ? ig.elements.docRoot : '') + curretNode + `/div[${j}]`;
+          const [articleRowItem] = await ig.page.$x(articleRowItemXpath);
+
+          if (articleRowItem) {
+            await articleRowItem.click();
+            await ig.page.waitFor(1500);
+            await callback(articleCol, articleRowItem);
+            await ig.page.waitFor(1500);
+            await ig.goBack();
+          }
+
+          await ig.page.evaluate((ele) => {
+            ele.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }, articleCol);
+
+          await ig.page.waitFor(1500);
+
+          i++;
+
+          if (i === parseInt(numberOfPosts)) {
+            return;
+          }
+        }
+
+        await ig.page.waitFor(2000);
+
+        rowCount++;
+
+        await loadPosts();
+      }
+
+      await loadPosts();
+
+    } catch (err) {
+      console.log(err);
     }
   },
 
